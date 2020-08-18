@@ -432,6 +432,14 @@ class AudioPlayerTask extends BackgroundAudioTask {
 class MediaLibrary {
   final _items = <MediaItem>[
     MediaItem(
+      id: "https://home.pseudo-servers.com/~ltitus/audio.mp3",
+      album: "Get Schwifty",
+      title: "Wubba Lubba Dub Dub",
+      artist: "Rick Sanchez ft. Arsenio Hall",
+      duration: Duration(milliseconds: 125000),
+      artUri: "https://home.pseudo-servers.com/~ltitus/cover.jpg",
+    ),
+    MediaItem(
       id: "https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3",
       album: "Science Friday",
       title: "A Salute To Head-Scratching Science",
@@ -472,7 +480,7 @@ class TextPlayerTask extends BackgroundAudioTask {
   @override
   Future<void> onStart(Map<String, dynamic> params) async {
     await _playPause();
-    for (var i = 1; i <= 10 && !_finished; i++) {
+    for (var i = 1; i <= 5 && !_finished; i++) {
       AudioServiceBackground.setMediaItem(mediaItem(i));
       AudioServiceBackground.androidForceEnableMediaButtons();
       _tts.speak('$i');
@@ -604,27 +612,4 @@ class Seeker {
   stop() {
     _running = false;
   }
-}
-
-class MyBackgroundTask extends BackgroundAudioTask {
-  // Initialise your audio task
-  onStart(Map<String, dynamic> params) {}
-  // Handle a request to stop audio and finish the task
-  onStop() async {}
-  // Handle a request to play audio
-  onPlay() {}
-  // Handle a request to pause audio
-  onPause() {}
-  // Handle a headset button click (play/pause, skip next/prev)
-  onClick(MediaButton button) {}
-  // Handle a request to skip to the next queue item
-  onSkipToNext() {}
-  // Handle a request to skip to the previous queue item
-  onSkipToPrevious() {}
-  // Handle a request to seek to a position
-  onSeekTo(Duration position) {}
-  // Handle a phone call or other interruption
-  onAudioFocusLost(AudioInterruption interruption) {}
-  // Handle the end of an audio interruption.
-  onAudioFocusGained(AudioInterruption interruption) {}
 }
